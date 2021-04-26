@@ -1,21 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:techpost/Asset_data.dart';
+import 'package:techpost/asset_data.dart';
 
-class Appbar_design extends StatelessWidget {
-  final data = new Assetdata();
+class AppbarDesign extends StatelessWidget {
+  final data =  DataFile();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.white,
-            leading: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Image.asset(
+            leading: Image.asset(
                   data.profile,
                   fit: BoxFit.contain,
-                )),
+                ),
             title: Center(
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
