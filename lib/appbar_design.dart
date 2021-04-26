@@ -29,13 +29,12 @@ class Appbar_design extends StatelessWidget {
               Image.asset(data.strike),
             ]),
         bottomNavigationBar: BottomNavigationBar(
-            currentIndex: 0, // this will be set when a new tab is tapped
             items: [
               BottomNavigationBarItem(
                 icon: IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.home_outlined),
-                  color: Colors.black,
+                  color: Colors.black54,
                 ),
                 label: "",
               ),
@@ -43,7 +42,7 @@ class Appbar_design extends StatelessWidget {
                 icon: IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.search),
-                  color: Colors.black,
+                  color: Colors.black54,
                 ),
                 label: "",
               ),
@@ -51,7 +50,7 @@ class Appbar_design extends StatelessWidget {
                 icon: IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.mail_outline),
-                  color: Colors.black,
+                  color: Colors.black54,
                 ),
                 label: "",
               ),
@@ -59,7 +58,7 @@ class Appbar_design extends StatelessWidget {
                 icon: IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.notifications_none),
-                  color: Colors.black,
+                  color: Colors.black54,
                 ),
                 label: "",
               )
