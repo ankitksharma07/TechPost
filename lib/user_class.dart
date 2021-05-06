@@ -16,12 +16,12 @@ class User {
   }
 }
 
-class API {
+class PostAndUserData {
   String name;
   String username;
   String body;
 
-  API(this.name, this.username, this.body);
+  PostAndUserData(this.name, this.username, this.body);
 }
 
 List<Post> postFromJson(String str) => List<Post>.from(json.decode(str).map((x) => Post.fromJson(x)));
