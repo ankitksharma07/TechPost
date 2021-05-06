@@ -62,17 +62,10 @@ class _AppBarDesignState extends State<AppBarDesign> {
           Image.asset(data.strike),
         ],
       ),
-      body: FutureBuilder(
-          future: viewModel.apiMergeData(),
-          builder: (context, AsyncSnapshot<List<PostAndUserData>> snap) {
-            if (!snap.hasData) {
-              // ignore: missing_return
-              return const CircularProgressIndicator();
-            } else {
-              return ListView.builder(
-                  itemCount: snap.data.length,
+      body: ListView.builder(
+                  itemCount: viewModel.mergeData.length,
                   itemBuilder: (context, index) {
-                    final initial = snap.data[index].name[0].toUpperCase();
+                    final initial = viewModel.mergeDataList[index].name[0].toUpperCase();
                     return ListTile(
                       title: Container(
                         decoration: const BoxDecoration(
@@ -119,7 +112,7 @@ class _AppBarDesignState extends State<AppBarDesign> {
                                       padding: const EdgeInsets.only(
                                           left: 2, bottom: 19),
                                       child: Text(
-                                        snap.data[index].name,
+                                        viewModel.mergeDataList[index].name,
                                         style: const TextStyle(
                                             fontWeight: FontWeight.w700,
                                             fontSize: 15),
@@ -138,7 +131,7 @@ class _AppBarDesignState extends State<AppBarDesign> {
                                       padding: const EdgeInsets.only(
                                           left: 5, bottom: 19),
                                       child: Text(
-                                        snap.data[index].username,
+                                         viewModel.mergeDataList[index].username,
                                         style: const TextStyle(fontSize: 13),
                                       ),
                                     ),
@@ -160,7 +153,7 @@ class _AppBarDesignState extends State<AppBarDesign> {
                                         padding: const EdgeInsets.only(
                                             left: 59, top: 43),
                                         child: Text(
-                                          snap.data[index].body,
+                                          viewModel.mergeDataList[index].body,
                                           style: const TextStyle(fontSize: 13),
                                         ),
                                       ),
@@ -230,9 +223,7 @@ class _AppBarDesignState extends State<AppBarDesign> {
                         ),
                       ),
                     );
-                  });
-            }
-          }),
+                  }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
