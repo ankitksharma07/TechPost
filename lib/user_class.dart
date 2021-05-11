@@ -20,8 +20,10 @@ class PostAndUserData {
   String name;
   String username;
   String body;
+  bool likePost;
 
-  PostAndUserData(this.name, this.username, this.body);
+  // ignore: avoid_positional_boolean_parameters
+  PostAndUserData(this.name, this.username, this.body,this.likePost);
 }
 
 List<Post> postFromJson(String str) => List<Post>.from(json.decode(str).map((x) => Post.fromJson(x)));

@@ -1,18 +1,15 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techpost/asset_data.dart';
-import 'package:techpost/user_class.dart';
-import 'change_notify.dart';
-
+import 'usertweet_notify.dart';
 
 class ApiMergingData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<ApiChangeNotify>(
+    return ChangeNotifierProvider<UserTweetNotify>(
       create: (BuildContext context) {
-        return ApiChangeNotify();
+        return UserTweetNotify();
       },
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -21,6 +18,7 @@ class ApiMergingData extends StatelessWidget {
     );
   }
 }
+
 class AppBarDesign extends StatefulWidget {
   @override
   _AppBarDesignState createState() => _AppBarDesignState();
@@ -31,7 +29,7 @@ class _AppBarDesignState extends State<AppBarDesign> {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = Provider.of<ApiChangeNotify>(context);
+    final viewModel = Provider.of<UserTweetNotify>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -62,168 +60,190 @@ class _AppBarDesignState extends State<AppBarDesign> {
           Image.asset(data.strike),
         ],
       ),
-      body: ListView.builder(
-                  itemCount: viewModel.mergeData.length,
-                  itemBuilder: (context, index) {
-                    final initial = viewModel.mergeDataList[index].name[0].toUpperCase();
-                    return ListTile(
-                      title: Container(
-                        decoration: const BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(color: Colors.black12))),
-                        child: Column(
+      body: viewModel.mergeData.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: viewModel.mergeData.length,
+              itemBuilder: (context, index) {
+                final initial =
+                    viewModel.mergeDataList[index].name[0].toUpperCase();
+                return ListTile(
+                  title: Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(color: Colors.black12),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Stack(
                           children: [
-                            Stack(
+                            Row(
+                              // ignore: prefer_const_literals_to_create_immutables
                               children: [
-                                Row(
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  children: [
-                                    Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 40, top: 6),
-                                        child: Image.asset(
-                                          data.heartsolid,
-                                          fit: BoxFit.contain,
-                                          height: 12,
-                                          color: Colors.black54,
-                                        )),
-                                    const Padding(
-                                      padding: EdgeInsets.only(top: 6.0),
-                                      child: Text(
-                                        "  Rajveer shah liked and sid liked",
-                                        style: TextStyle(fontSize: 12),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 26),
-                                      child: CircleAvatar(
-                                        radius: 28,
-                                        child: CircleAvatar(
-                                          child: Text(initial),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 2, bottom: 19),
-                                      child: Text(
-                                        viewModel.mergeDataList[index].name,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 15),
-                                      ),
-                                    ),
-                                    const Padding(
-                                      padding:
-                                          EdgeInsets.only(left: 5, bottom: 19),
-                                      child: Icon(
-                                        Icons.verified,
-                                        size: 18,
-                                        color: Colors.lightBlue,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 5, bottom: 19),
-                                      child: Text(
-                                         viewModel.mergeDataList[index].username,
-                                        style: const TextStyle(fontSize: 13),
-                                      ),
-                                    ),
-                                    const Padding(
-                                      padding:
-                                          EdgeInsets.only(left: 5, bottom: 19),
-                                      child: Text(
-                                        "-10h",
-                                        style: TextStyle(fontSize: 13),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  // ignore: prefer_const_literals_to_create_immutables
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 59, top: 43),
-                                        child: Text(
-                                          viewModel.mergeDataList[index].body,
-                                          style: const TextStyle(fontSize: 13),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Positioned(
-                                  top: 28,
-                                  left: 360,
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 40, top: 6),
                                   child: Image.asset(
-                                    data.arrow,
+                                    data.heartsolid,
                                     fit: BoxFit.contain,
-                                    height: 6,
+                                    height: 12,
                                     color: Colors.black54,
                                   ),
-                                )
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 6.0),
+                                  child: Text(
+                                    "  Rajveer shah liked and sid liked ",
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ),
                               ],
-                            ),
-                            const SizedBox(
-                              height: 7,
                             ),
                             Row(
-                              children: [
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: <Widget>[
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 60, bottom: 7),
-                                  child: Image.asset(
-                                    data.comment,
-                                    fit: BoxFit.contain,
-                                    height: 14,
-                                    color: Colors.black54,
+                                  padding: const EdgeInsets.only(top: 26),
+                                  child: CircleAvatar(
+                                    radius: 28,
+                                    child: CircleAvatar(
+                                      child: Text(initial),
+                                    ),
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 68, bottom: 7),
-                                  child: Image.asset(
-                                    data.retweet,
-                                    fit: BoxFit.contain,
-                                    height: 14,
-                                    color: Colors.black54,
+                                      left: 2, bottom: 19),
+                                  child: Text(
+                                    viewModel.mergeDataList[index].name,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 15),
+                                  ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 5, bottom: 19),
+                                  child: Icon(
+                                    Icons.verified,
+                                    size: 18,
+                                    color: Colors.lightBlue,
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 68, bottom: 7),
-                                  child: Image.asset(
-                                    data.heart,
-                                    fit: BoxFit.contain,
-                                    height: 14,
-                                    color: Colors.black54,
+                                      left: 5, bottom: 19),
+                                  child: Text(
+                                    viewModel.mergeDataList[index].username,
+                                    style: const TextStyle(fontSize: 13),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 68, bottom: 7),
-                                  child: Image.asset(
-                                    data.share,
-                                    fit: BoxFit.contain,
-                                    height: 14,
-                                    color: Colors.black54,
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 5, bottom: 19),
+                                  child: Text(
+                                    "-10h",
+                                    style: TextStyle(fontSize: 13),
                                   ),
-                                )
+                                ),
                               ],
                             ),
+                            Row(
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 59, top: 43),
+                                    child: Text(
+                                      viewModel.mergeDataList[index].body,
+                                      style: const TextStyle(fontSize: 13),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Positioned(
+                              top: 28,
+                              left: 360,
+                              child: Image.asset(
+                                data.arrow,
+                                fit: BoxFit.contain,
+                                height: 6,
+                                color: Colors.black54,
+                              ),
+                            )
                           ],
                         ),
-                      ),
-                    );
-                  }),
+                        const SizedBox(
+                          height: 7,
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 60, bottom: 7),
+                              child: Image.asset(
+                                data.comment,
+                                fit: BoxFit.contain,
+                                height: 14,
+                                color: Colors.black54,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 68, bottom: 7),
+                              child: Image.asset(
+                                data.retweet,
+                                fit: BoxFit.contain,
+                                height: 14,
+                                color: Colors.black54,
+                              ),
+                            ),
+                            Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 68, bottom: 7),
+                                child: GestureDetector(
+                                  // ignore: unnecessary_parenthesis
+                                  onTap:( () {
+                                    viewModel.postLike(index);
+                                  }),
+                                  child: Icon(
+                                    viewModel.mergeDataList[index].likePost ==
+                                            false
+                                        ? Icons.favorite_border
+                                        : Icons.favorite,
+                                    color: viewModel.mergeDataList[index]
+                                                .likePost ==
+                                            true
+                                        ? Colors.red
+                                        : null,
+                                    size: 18,
+                                  ),
+                                ),
+                                // child: Image.asset(
+                                //   data.heart,
+                                //   fit: BoxFit.contain,
+                                //   height: 14,
+                                //   color: Colors.black54,
+                                // ),
+                                ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 68, bottom: 7),
+                              child: Image.asset(
+                                data.share,
+                                fit: BoxFit.contain,
+                                height: 14,
+                                color: Colors.black54,
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
