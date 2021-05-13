@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class UserTweetNotify extends ChangeNotifier {
   final List<PostAndUserData> mergeData = [];
   List<PostAndUserData> _mergeDataList = [];
-
+  List<String> userProfileData = [];
   // ignore: unnecessary_getters_setters
   List<PostAndUserData> get mergeDataList => _mergeDataList;
 
@@ -27,7 +27,15 @@ class UserTweetNotify extends ChangeNotifier {
       final User userName = await userData(postId.userId.toString());
 
       mergeData.add(PostAndUserData(
-          userName.name, userName.username, postId.body, false));
+          userName.name,
+          userName.username,
+          postId.body,
+          false,
+          userName.email,
+          userName.phone,
+          userName.address.geo.lng,
+          userName.address.geo.lat));
+
       mergeDataList = mergeData.toList();
     }
     notifyListeners();
@@ -55,13 +63,29 @@ class UserTweetNotify extends ChangeNotifier {
     }
   }
 
-  bool postLike(int index) {
-    if (mergeDataList[index].likePost == false) {
+  void postLike(int index) {
+    if (!mergeDataList[index].likePost) {
       notifyListeners();
-      return mergeDataList[index].likePost = true;
+      mergeDataList[index].likePost = true;
     } else {
       notifyListeners();
-      return mergeDataList[index].likePost = false;
+      mergeDataList[index].likePost = false;
     }
   }
+
+  void passUserData(
+      String name, String email, String phone, String lat, String lng) {
+    if (userProfileData.isEmpty) {
+      return userProfileData.add(
+          '$name\nMail_ID:- $email\nNumber:- $phone\nAddress[Geo]:\nlat:- $lat\nlng:- $lng');
+    } else if (userProfileData.isNotEmpty) {
+       {
+        userProfileData.clear();
+        userProfileData.add(
+              '$name\n Mail_ID:- $email\nNumber:-$phone\nAddress[Geo]:-\nlat:- $lat\nlng:-$lng');
+       }
+
+    notifyListeners();
+  }
+}
 }

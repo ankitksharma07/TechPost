@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techpost/asset_data.dart';
+import 'package:techpost/user_profiledata.dart';
 import 'usertweet_notify.dart';
 
 class ApiMergingData extends StatelessWidget {
@@ -105,10 +106,36 @@ class _AppBarDesignState extends State<AppBarDesign> {
                               children: <Widget>[
                                 Padding(
                                   padding: const EdgeInsets.only(top: 26),
-                                  child: CircleAvatar(
-                                    radius: 28,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        viewModel.passUserData(
+                                          viewModel.mergeDataList[index].name
+                                              .toUpperCase(),
+                                          viewModel.mergeDataList[index].email
+                                              .toUpperCase(),
+                                          viewModel.mergeDataList[index].phone
+                                              .toUpperCase(),
+                                          viewModel.mergeDataList[index].lat
+                                              .toUpperCase(),
+                                          viewModel.mergeDataList[index].lng
+                                              .toUpperCase(),
+                                        );
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return PassDataItem();
+                                            },
+                                          ),
+                                        );
+                                      });
+                                    },
                                     child: CircleAvatar(
-                                      child: Text(initial),
+                                      radius: 28,
+                                      child: CircleAvatar(
+                                        child: Text(initial),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -200,33 +227,33 @@ class _AppBarDesignState extends State<AppBarDesign> {
                               ),
                             ),
                             Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 68, bottom: 7),
-                                child: GestureDetector(
-                                  // ignore: unnecessary_parenthesis
-                                  onTap:( () {
-                                    viewModel.postLike(index);
-                                  }),
-                                  child: Icon(
-                                    viewModel.mergeDataList[index].likePost ==
-                                            false
-                                        ? Icons.favorite_border
-                                        : Icons.favorite,
-                                    color: viewModel.mergeDataList[index]
-                                                .likePost ==
-                                            true
-                                        ? Colors.red
-                                        : null,
-                                    size: 18,
-                                  ),
+                              padding:
+                                  const EdgeInsets.only(left: 68, bottom: 7),
+                              child: GestureDetector(
+                                // ignore: unnecessary_parenthesis
+                                onTap: (() {
+                                  viewModel.postLike(index);
+                                }),
+                                child: Icon(
+                                  viewModel.mergeDataList[index].likePost ==
+                                          false
+                                      ? Icons.favorite_border
+                                      : Icons.favorite,
+                                  color:
+                                      viewModel.mergeDataList[index].likePost ==
+                                              true
+                                          ? Colors.red
+                                          : null,
+                                  size: 18,
                                 ),
-                                // child: Image.asset(
-                                //   data.heart,
-                                //   fit: BoxFit.contain,
-                                //   height: 14,
-                                //   color: Colors.black54,
-                                // ),
-                                ),
+                              ),
+                              // child: Image.asset(
+                              //   data.heart,
+                              //   fit: BoxFit.contain,
+                              //   height: 14,
+                              //   color: Colors.black54,
+                              // ),
+                            ),
                             Padding(
                               padding:
                                   const EdgeInsets.only(left: 68, bottom: 7),
