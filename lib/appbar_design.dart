@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:techpost/asset_data.dart';
+import 'package:techpost/user_class.dart';
 import 'package:techpost/user_profiledata.dart';
 import 'usertweet_notify.dart';
 
@@ -109,26 +110,23 @@ class _AppBarDesignState extends State<AppBarDesign> {
                                   child: GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        viewModel.passUserData(
-                                          viewModel.mergeDataList[index].name
-                                              .toUpperCase(),
-                                          viewModel.mergeDataList[index].email
-                                              .toUpperCase(),
-                                          viewModel.mergeDataList[index].phone
-                                              .toUpperCase(),
-                                          viewModel.mergeDataList[index].lat
-                                              .toUpperCase(),
-                                          viewModel.mergeDataList[index].lng
-                                              .toUpperCase(),
+                                        final route = MaterialPageRoute(
+                                          builder: (BuildContext context) => UserProfile(
+                                              value:  UserProfileData(
+                                                viewModel.mergeDataList[index].name
+                                                    .toUpperCase(),
+                                                viewModel.mergeDataList[index].email
+                                                    .toUpperCase(),
+                                                viewModel.mergeDataList[index].phone
+                                                    .toUpperCase(),
+                                                viewModel.mergeDataList[index].lat
+                                                    .toUpperCase(),
+                                                viewModel.mergeDataList[index].lng
+                                                    .toUpperCase(),
+                                              )),
                                         );
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) {
-                                              return PassDataItem();
-                                            },
-                                          ),
-                                        );
+
+                                        Navigator.of(context).push(route);
                                       });
                                     },
                                     child: CircleAvatar(
