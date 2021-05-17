@@ -112,9 +112,14 @@ class _AppBarDesignState extends State<AppBarDesign> {
                                       setState(() {
                                         final route = MaterialPageRoute(
                                           builder: (BuildContext context) => UserProfile(
-                                              value:  UserProfileData(
+                                              value:  PostAndUserData(
+                                                viewModel.mergeDataList[index].username
+                                                    .toUpperCase(),
                                                 viewModel.mergeDataList[index].name
                                                     .toUpperCase(),
+                                                viewModel.mergeDataList[index].body
+                                                    .toUpperCase(),
+                                                false,
                                                 viewModel.mergeDataList[index].email
                                                     .toUpperCase(),
                                                 viewModel.mergeDataList[index].phone

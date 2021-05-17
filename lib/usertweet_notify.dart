@@ -73,19 +73,5 @@ class UserTweetNotify extends ChangeNotifier {
     }
   }
 
-//   void passUserData(
-//       String name, String email, String phone, String lat, String lng) {
-//     if (userProfileData.isEmpty) {
-//       return userProfileData.add(
-//           '$name\nMail_ID:- $email\nNumber:- $phone\nAddress[Geo]:\nlat:- $lat\nlng:- $lng');
-//     } else if (userProfileData.isNotEmpty) {
-//        {
-//         userProfileData.clear();
-//         userProfileData.add(
-//               '$name\n Mail_ID:- $email\nNumber:-$phone\nAddress[Geo]:-\nlat:- $lat\nlng:-$lng');
-//        }
-//
-//     notifyListeners();
-//   }
-// }
+
 }

@@ -76,20 +76,6 @@ class PostAndUserData {
   PostAndUserData(this.name, this.username, this.body,this.likePost,this.email,this.phone,this.lng,this.lat);
 }
 
-
-class UserProfileData{
-
-  String name;
-  String email;
-  String phone;
-  String lng;
-  String lat;
-  // ignore: avoid_positional_boolean_parameters
-  UserProfileData(this.name,this.email,this.phone,this.lng,this.lat);
-}
-
-
-
 List<Post> postFromJson(String str) => List<Post>.from(json.decode(str).map((x) => Post.fromJson(x)));
 
 String postToJson(List<Post> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
