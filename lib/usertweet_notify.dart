@@ -27,14 +27,14 @@ class UserTweetNotify extends ChangeNotifier {
       final User userName = await userData(postId.userId.toString());
 
       mergeData.add(PostAndUserData(
-          userName.name,
-          userName.username,
-          postId.body,
-          false,
-          userName.email,
-          userName.phone,
-          userName.address.geo.lng,
-          userName.address.geo.lat));
+          name:userName.name,
+          username:userName.username,
+          body:postId.body,
+          likePost: false,
+          email:userName.email,
+          phone:userName.phone,
+          lng:userName.address.geo.lng,
+          lat:userName.address.geo.lat));
 
       mergeDataList = mergeData.toList();
     }
@@ -72,6 +72,5 @@ class UserTweetNotify extends ChangeNotifier {
       mergeDataList[index].likePost = false;
     }
   }
-
 
 }

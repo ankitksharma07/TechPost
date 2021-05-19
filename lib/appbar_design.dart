@@ -108,31 +108,29 @@ class _AppBarDesignState extends State<AppBarDesign> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 26),
                                   child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        final route = MaterialPageRoute(
-                                          builder: (BuildContext context) => UserProfile(
-                                              value:  PostAndUserData(
-                                                viewModel.mergeDataList[index].username
+                                    onTap: (){
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(builder: (context) => UserProfile(
+                                              value:  User(
+                                                name:viewModel.mergeDataList[index]
+                                                    .name
                                                     .toUpperCase(),
-                                                viewModel.mergeDataList[index].name
+                                                email:viewModel.mergeDataList[index]
+                                                    .email
                                                     .toUpperCase(),
-                                                viewModel.mergeDataList[index].body
+                                                phone:viewModel.mergeDataList[index]
+                                                    .phone
                                                     .toUpperCase(),
-                                                false,
-                                                viewModel.mergeDataList[index].email
+                                                lat:viewModel.mergeDataList[index]
+                                                    .lat
                                                     .toUpperCase(),
-                                                viewModel.mergeDataList[index].phone
-                                                    .toUpperCase(),
-                                                viewModel.mergeDataList[index].lat
-                                                    .toUpperCase(),
-                                                viewModel.mergeDataList[index].lng
+                                                lng:viewModel.mergeDataList[index]
+                                                    .lng
                                                     .toUpperCase(),
                                               )),
-                                        );
-
-                                        Navigator.of(context).push(route);
-                                      });
+                                        ));
+                                        //Navigator.of(context).push(route);
                                     },
                                     child: CircleAvatar(
                                       radius: 28,
@@ -250,12 +248,6 @@ class _AppBarDesignState extends State<AppBarDesign> {
                                   size: 18,
                                 ),
                               ),
-                              // child: Image.asset(
-                              //   data.heart,
-                              //   fit: BoxFit.contain,
-                              //   height: 14,
-                              //   color: Colors.black54,
-                              // ),
                             ),
                             Padding(
                               padding:

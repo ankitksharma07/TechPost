@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 class User {
-  final String username;
   final String name;
+  final String username;
   final String email;
   final String phone;
   final Address address;
@@ -73,7 +73,7 @@ class PostAndUserData {
   String lng;
   String lat;
   // ignore: avoid_positional_boolean_parameters
-  PostAndUserData(this.name, this.username, this.body,this.likePost,this.email,this.phone,this.lng,this.lat);
+  PostAndUserData({this.name, this.username, this.body,this.likePost,this.email,this.phone,this.lng,this.lat});
 }
 
 List<Post> postFromJson(String str) => List<Post>.from(json.decode(str).map((x) => Post.fromJson(x)));
